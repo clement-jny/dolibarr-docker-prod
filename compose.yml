@@ -1,0 +1,62 @@
+services:
+  web:
+    container_name: dolibarr_web
+    image: dolibarr/dolibarr:latest
+    environment:
+      WWW_USER_ID: ${WWW_USER_ID}
+      WWW_GROUP_ID: ${WWW_GROUP_ID}
+
+      DOLI_DB_HOST: ${DOLI_DB_HOST}
+      DOLI_DB_NAME: ${DOLI_DB_NAME}
+      DOLI_DB_USER: ${DOLI_DB_USER}
+      DOLI_DB_PASSWORD: ${DOLI_DB_PASSWORD}
+
+      DOLI_ADMIN_LOGIN: ${DOLI_ADMIN_LOGIN}
+      DOLI_ADMIN_PASSWORD: ${DOLI_ADMIN_PASSWORD}
+
+      DOLI_COMPANY_NAME: ${DOLI_COMPANY_NAME}
+      DOLI_COMPANY_COUNTRYCODE: ${DOLI_COMPANY_COUNTRYCODE}
+    ports:
+      - '81:80'
+    links:
+      - db
+    volumes:
+      - ./custom:/var/www/html/custom
+      - ./documents:/var/www/documents
+    restart: always
+
+  db:
+    container_name: dolibarr_db
+    image: mariadb:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DOLI_DB_NAME}
+      MYSQL_USER: ${DOLI_DB_USER}
+      MYSQL_PASSWORD: ${DOLI_DB_PASSWORD}
+    volumes:
+      - ./mariadb:/var/lib/mysql
+    restart: always
+
+  adminer:
+    container_name: dolibarr_adminer
+    image: adminer:latest
+    environment:
+      ADMINER_DEFAULT_SERVER: ${DOLI_DB_HOST}
+    volumes:
+      - ./adminer/adminer.css:/var/www/html/adminer.css
+    ports:
+      - '8080:8080'
+    depends_on:
+      - db
+    restart: always
+
+  phpmyadmin:
+    container_name: dolibarr_phpmyadmin
+    image: phpmyadmin:latest
+    ports:
+      - '8081:80'
+    links:
+      - db
+    depends_on:
+      - db
+    restart: always
