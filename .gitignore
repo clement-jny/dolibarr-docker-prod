@@ -4,3 +4,5 @@ mariadb
 old
 
 .env
+
+.DS_Store
