@@ -5,6 +5,7 @@ services:
     environment:
       WWW_USER_ID: ${WWW_USER_ID}
       WWW_GROUP_ID: ${WWW_GROUP_ID}
+      PHP_INI_UPLOAD_MAX_FILESIZE: ${PHP_INI_UPLOAD_MAX_FILESIZE}
 
       DOLI_DB_HOST: ${DOLI_DB_HOST}
       DOLI_DB_NAME: ${DOLI_DB_NAME}
