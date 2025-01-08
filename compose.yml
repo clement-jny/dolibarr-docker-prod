@@ -12,6 +12,7 @@ services:
       DOLI_DB_NAME: ${DOLI_DB_NAME}
       DOLI_DB_USER: ${DOLI_DB_USER}
       DOLI_DB_PASSWORD: ${DOLI_DB_PASSWORD}
+      DOLI_URL_ROOT: ${DOLI_URL_ROOT}
 
       DOLI_ADMIN_LOGIN: ${DOLI_ADMIN_LOGIN}
       DOLI_ADMIN_PASSWORD: ${DOLI_ADMIN_PASSWORD}
@@ -19,7 +20,7 @@ services:
       DOLI_COMPANY_NAME: ${DOLI_COMPANY_NAME}
       DOLI_COMPANY_COUNTRYCODE: ${DOLI_COMPANY_COUNTRYCODE}
     ports:
-      - '81:80'
+      - ${DOLI_HOST_PORT}:${DOLI_DOCKER_PORT}
     links:
       - db
     volumes:
@@ -39,6 +40,17 @@ services:
       - ./mariadb:/var/lib/mysql
     restart: always
 
+  phpmyadmin:
+    container_name: dolibarr_phpmyadmin
+    image: phpmyadmin:latest
+    ports:
+      - ${PMA_HOST_PORT}:${PMA_DOCKER_PORT}
+    links:
+      - db
+    depends_on:
+      - db
+    restart: always
+
   adminer:
     container_name: dolibarr_adminer
     image: adminer:latest
@@ -47,18 +59,7 @@ services:
     volumes:
       - ./adminer/adminer.css:/var/www/html/adminer.css
     ports:
-      - '8080:8080'
-    depends_on:
-      - db
-    restart: always
-
-  phpmyadmin:
-    container_name: dolibarr_phpmyadmin
-    image: phpmyadmin:latest
-    ports:
-      - '8081:80'
-    links:
-      - db
+      - ${ADM_HOST_PORT}:${ADM_DOCKER_PORT}
     depends_on:
       - db
     restart: always
