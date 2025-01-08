@@ -18,7 +18,7 @@ Create a `.env` file based on `.env.example` by copying it and modifying the val
 
 ```bash
 # Copy .env.example to .env
-cp .env.example .env
+mv .env.example .env
 ```
 
 Edit the [.env](.env) file and adjust the configuration according to your requirements.
