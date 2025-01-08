@@ -17,7 +17,7 @@ If the following directories do not exist, create them. **Do not commit these di
 Create a `.env` file based on `.env.example` by copying it and modifying the values as needed:
 
 ```bash
-# Copy .env.example to .env
+# Rename .env.example to .env
 mv .env.example .env
 ```
 
