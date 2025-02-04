@@ -29,7 +29,11 @@ jobs:
         run: |
           MESSAGE=$(awk '/## \[v/{f++} f==1' ChangeLog.md | tail -n +2)
           echo "Latest message found: $MESSAGE"
-          echo "MESSAGE=$MESSAGE" >> $GITHUB_ENV
+          {
+            echo 'MESSAGE<<EOF'
+            echo "$MESSAGE"
+            echo 'EOF'
+          } >> "$GITHUB_ENV"
 
       - name: Check if tag already exists
         id: check_tag
