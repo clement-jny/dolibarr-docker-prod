@@ -24,6 +24,13 @@ jobs:
           echo "Latest version found: v$VERSION"
           echo "VERSION=v$VERSION" >> $GITHUB_ENV
 
+      - name: Extract latest change message from ChangeLog
+        id: get_message
+        run: |
+          MESSAGE=$(awk '/## \[v/{f++} f==1' ChangeLog.md | tail -n +2)
+          echo "Latest message found: $MESSAGE"
+          echo "MESSAGE=$MESSAGE" >> $GITHUB_ENV
+
       - name: Check if tag already exists
         id: check_tag
         run: |
@@ -53,6 +60,6 @@ jobs:
             🚀 **New Release ${{ env.VERSION }}**
 
             Changelog:
-            $(awk '/## \[v/{f++} f==1' ChangeLog.md | tail -n +2)
+            ${{ env.MESSAGE }}
           draft: false
           prerelease: false
