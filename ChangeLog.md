@@ -1,3 +1,9 @@
+## [v1.6.0] - 2025-02-04
+
+### Added
+
+- Added generation of summary file.
+
 ## [v1.5.0] - 2025-02-04
 
 ### Added

@@ -53,3 +53,12 @@ fi
 
 # Launch Docker Compose
 docker compose up --build -d
+
+# Write summary to a file
+cat <<EOF > summary.txt
+Lien d'accès: ${DOLI_URL_ROOT}
+Crédentials de l'administrateur: ${DOLI_ADMIN_LOGIN} / ${DOLI_ADMIN_PASSWORD}
+Nom de la base de données: ${DOLI_DB_NAME}
+Crédential de l'utilisateur de la base de données pour dolibarr: ${DOLI_DB_USER} / ${DOLI_DB_PASSWORD}
+Crédential de l'utilisateur root de la base de données: root / ${MYSQL_ROOT_PASSWORD}
+EOF
