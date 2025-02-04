@@ -41,10 +41,18 @@ services:
       - traefik.http.routers.${DOLI_COMPANY_NAME_CLEAN}.entrypoints=websecure
       - traefik.http.routers.${DOLI_COMPANY_NAME_CLEAN}.tls=true
       - traefik.http.routers.${DOLI_COMPANY_NAME_CLEAN}.tls.certresolver=production
-      - traefik.http.routers.${DOLI_COMPANY_NAME_CLEAN}.rule=Host(\`${DOLI_URL_ROOT}\`)
+      - traefik.http.routers.${DOLI_COMPANY_NAME_CLEAN}.rule=Host(\`${TRAEFIK_HOST}\`)
       - traefik.http.services.${DOLI_COMPANY_NAME_CLEAN}.loadbalancer.server.port=\${DOLI_DOCKER_PORT}
     networks:
       - traefik_default
+
+  db:
+    networks:
+      - traefik_default
+
+networks:
+  traefik_default:
+    external: true
 EOF
   echo "✅ Traefik support enabled with name: $DOLI_COMPANY_NAME_CLEAN"
 else
