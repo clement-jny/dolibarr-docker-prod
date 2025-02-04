@@ -1,3 +1,15 @@
+## [v1.7.0] - 2025-02-04
+
+### Added
+
+- TRAEFIK_HOST env variable.
+
+### Changed
+
+- Add TRAEFIK_HOST in setup script.
+- Add db services under traefik.
+- Update README.
+
 ## [v1.6.0] - 2025-02-04
 
 ### Added
