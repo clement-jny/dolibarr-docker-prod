@@ -77,3 +77,4 @@ If enabled:
 - Labels for Traefik will be added dynamically.
 
 If you choose not to enable Traefik, the standard setup will proceed without additional proxy settings.
+If you're using traefik, don't forget to delete the 'ports' section in `compose.yml`
