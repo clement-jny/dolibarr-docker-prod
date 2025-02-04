@@ -1,0 +1,55 @@
+name: Auto Release from ChangeLog
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    name: Create Release from ChangeLog
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Extract latest version from ChangeLog
+        id: get_version
+        run: |
+          VERSION=$(grep -oP "(?<=## \[v)[0-9]+\.[0-9]+\.[0-9]+" ChangeLog.md | head -1)
+          echo "Latest version found: v$VERSION"
+          echo "VERSION=v$VERSION" >> $GITHUB_ENV
+
+      - name: Check if tag already exists
+        id: check_tag
+        run: |
+          if git ls-remote --tags origin | grep -q "refs/tags/$VERSION"; then
+            echo "Tag already exists. Skipping release."
+            echo "EXISTS=true" >> $GITHUB_ENV
+          else
+            echo "Creating new release for $VERSION"
+            echo "EXISTS=false" >> $GITHUB_ENV
+          fi
+
+      - name: Create Git Tag
+        if: env.EXISTS == 'false'
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git tag -a "$VERSION" -m "Release $VERSION"
+          git push origin "$VERSION"
+
+      - name: Create GitHub Release
+        if: env.EXISTS == 'false'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ env.VERSION }}
+          name: Release ${{ env.VERSION }}
+          body: |
+            🚀 **New Release ${{ env.VERSION }}**
+
+            Changelog:
+            $(awk '/## \[v/{f++} f==1' ChangeLog.md | tail -n +2)
+          draft: false
+          prerelease: false
