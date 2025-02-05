@@ -1,9 +1,15 @@
 name: Auto Release from ChangeLog
 
 on:
-  push:
+  # Runs on closed pull request targeting the main branch
+  pull_request:
+    types:
+      - closed
     branches:
       - main
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -27,7 +33,7 @@ jobs:
       - name: Extract latest change message from ChangeLog
         id: get_message
         run: |
-          MESSAGE=$(awk '/## \[v/{f++} f==1' ChangeLog.md | tail -n +2)
+          MESSAGE=$(awk '/## \[v/{f++} f==1' ChangeLog.md | tail -n +3)
           echo "Latest message found: $MESSAGE"
           {
             echo 'MESSAGE<<EOF'
@@ -46,6 +52,17 @@ jobs:
             echo "EXISTS=false" >> $GITHUB_ENV
           fi
 
+      - name: Get the last tag
+        id: get_last_tag
+        run: |
+          git fetch --tags
+          LAST_TAG=$(git tag --sort=-creatordate | head -n 1)
+          if [ -n "$LAST_TAG" ]; then
+            echo "LAST_TAG=$LAST_TAG" >> $GITHUB_ENV
+          else
+            echo "No tags found, skipping." >> $GITHUB_ENV
+          fi
+
       - name: Create Git Tag
         if: env.EXISTS == 'false'
         run: |
@@ -54,16 +71,33 @@ jobs:
           git tag -a "$VERSION" -m "Release $VERSION"
           git push origin "$VERSION"
 
+      - name: Build release body
+        id: build_body
+        run: |
+          {
+            echo 'BODY<<EOF'
+            echo "🚀 **New Release ${{ env.VERSION }}**"
+            echo ""
+            echo "${{ env.MESSAGE }}"
+            echo ""
+            echo ""
+            echo "**Details:**"
+            if [ -z "$LAST_TAG" ]; then
+              echo "See changes here: https://github.com/${{ github.repository }}/commits/${{ env.VERSION }}"
+            else
+              echo "See changes here: https://github.com/${{ github.repository }}/compare/${{ env.LAST_TAG }}...${{ env.VERSION }}"
+            fi
+            echo 'EOF'
+          } >> "$GITHUB_ENV"
+
       - name: Create GitHub Release
         if: env.EXISTS == 'false'
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ env.VERSION }}
           name: Release ${{ env.VERSION }}
-          body: |
-            🚀 **New Release ${{ env.VERSION }}**
-
-            Changelog:
-            ${{ env.MESSAGE }}
+          body: ${{ env.BODY }}
           draft: false
           prerelease: false
+          # files: |
+          # build/*

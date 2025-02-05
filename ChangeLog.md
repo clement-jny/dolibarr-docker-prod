@@ -1,3 +1,11 @@
+## [Unreleased]
+
+## [v1.8.0] - 2025-02-05
+
+### Changed
+
+- Update workflow file.
+
 ## [v1.7.0] - 2025-02-04
 
 ### Added
