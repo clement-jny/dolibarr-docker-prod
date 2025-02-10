@@ -1,103 +1,75 @@
-name: Auto Release from ChangeLog
+name: 🚀 Auto Release
 
 on:
-  # Runs on closed pull request targeting the main branch
-  pull_request:
-    types:
-      - closed
-    branches:
-      - main
-
-  # Allows you to run this workflow manually from the Actions tab
+  push:
+    tags:
+      - '*'
   workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
+  release_notes:
+    name: Generate release notes
+    runs-on: ubuntu-latest
+
+    outputs:
+      release_body: ${{ steps.git-cliff.outputs.content }}
+      version: ${{ steps.git-cliff.outputs.version }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Generate a release notes
+        uses: orhun/git-cliff-action@v4
+        id: git-cliff
+        with:
+          config: config-cliff.toml
+          args: --verbose --latest --strip header
+        env:
+          OUTPUT: CHANGES.md
+          GITHUB_REPO: ${{ github.repository }}
+
+      - name: Switch to main branch
+        run: |
+          git fetch origin main
+          git checkout main
+          git pull origin main
+
+      - name: Generate a new changelog
+        uses: orhun/git-cliff-action@v4
+        id: git-cliff-generate
+        with:
+          config: config-cliff.toml
+          args: --verbose
+        env:
+          OUTPUT: CHANGELOG.md
+
+      - name: Commit updated ChangeLog
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add CHANGELOG.md
+          git commit -m "docs(changelog): update CHANGELOG in Auto Release"
+          git push origin main
+
   release:
-    name: Create Release from ChangeLog
+    name: Create & upload a release
+    needs: release_notes
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Extract latest version from ChangeLog
-        id: get_version
-        run: |
-          VERSION=$(grep -oP "(?<=## \[v)[0-9]+\.[0-9]+\.[0-9]+" ChangeLog.md | head -1)
-          echo "Latest version found: v$VERSION"
-          echo "VERSION=v$VERSION" >> $GITHUB_ENV
-
-      - name: Extract latest change message from ChangeLog
-        id: get_message
-        run: |
-          MESSAGE=$(awk '/## \[v/{f++} f==1' ChangeLog.md | tail -n +3)
-          echo "Latest message found: $MESSAGE"
-          {
-            echo 'MESSAGE<<EOF'
-            echo "$MESSAGE"
-            echo 'EOF'
-          } >> "$GITHUB_ENV"
-
-      - name: Check if tag already exists
-        id: check_tag
-        run: |
-          if git ls-remote --tags origin | grep -q "refs/tags/$VERSION"; then
-            echo "Tag already exists. Skipping release."
-            echo "EXISTS=true" >> $GITHUB_ENV
-          else
-            echo "Creating new release for $VERSION"
-            echo "EXISTS=false" >> $GITHUB_ENV
-          fi
-
-      - name: Get the last tag
-        id: get_last_tag
-        run: |
-          git fetch --tags
-          LAST_TAG=$(git tag --sort=-creatordate | head -n 1)
-          if [ -n "$LAST_TAG" ]; then
-            echo "LAST_TAG=$LAST_TAG" >> $GITHUB_ENV
-          else
-            echo "No tags found, skipping." >> $GITHUB_ENV
-          fi
-
-      - name: Create Git Tag
-        if: env.EXISTS == 'false'
-        run: |
-          git config user.name "GitHub Actions"
-          git config user.email "github-actions@users.noreply.github.com"
-          git tag -a "$VERSION" -m "Release $VERSION"
-          git push origin "$VERSION"
-
-      - name: Build release body
-        id: build_body
-        run: |
-          {
-            echo 'BODY<<EOF'
-            echo "🚀 **New Release ${{ env.VERSION }}**"
-            echo ""
-            echo "${{ env.MESSAGE }}"
-            echo ""
-            echo ""
-            echo "**Details:**"
-            if [ -z "$LAST_TAG" ]; then
-              echo "See changes here: https://github.com/${{ github.repository }}/commits/${{ env.VERSION }}"
-            else
-              echo "See changes here: https://github.com/${{ github.repository }}/compare/${{ env.LAST_TAG }}...${{ env.VERSION }}"
-            fi
-            echo 'EOF'
-          } >> "$GITHUB_ENV"
-
-      - name: Create GitHub Release
-        if: env.EXISTS == 'false'
+      - name: Create release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ env.VERSION }}
-          name: Release ${{ env.VERSION }}
-          body: ${{ env.BODY }}
+          name: Release ${{ needs.release_notes.outputs.version }}
+          tag_name: ${{ github.ref }}
+          body: ${{ needs.release_notes.outputs.release_body }}
           draft: false
           prerelease: false
-          # files: |
-          # build/*
+        #   files: |
+        #     build/*
