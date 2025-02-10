@@ -12,6 +12,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 - *(workflow)* New wf for auto changelog and update for auto release
 - Add custom git-cliff configuration
 
+### Documentation
+
+- *(changelog)* Update CHANGELOG in Auto Changelog
+
+### Other
+
+- *(other)* Delete old changelog file
+
 ## [1.8.0] - 2025-02-05
 
 ### Maintenance
