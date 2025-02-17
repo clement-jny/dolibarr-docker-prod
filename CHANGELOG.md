@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Documentation
+
+- *(changelog)* Update CHANGELOG in Auto Changelog
+
+## [1.9.1] - 2025-02-17
+
 ### Added
 
 - Add timezone support on mariadb container
@@ -84,7 +90,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 - *(other)* Initial commit
 
-[unreleased]: https://github.com/cjaunay/dolibarr-docker/compare/v1.9.0..HEAD
+[unreleased]: https://github.com/cjaunay/dolibarr-docker/compare/v1.9.1..HEAD
+[1.9.1]: https://github.com/cjaunay/dolibarr-docker/compare/v1.9.0..v1.9.1
 [1.9.0]: https://github.com/cjaunay/dolibarr-docker/compare/v1.8.0..v1.9.0
 [1.8.0]: https://github.com/cjaunay/dolibarr-docker/compare/v1.7.0..v1.8.0
 [1.7.0]: https://github.com/cjaunay/dolibarr-docker/compare/v1.6.0..v1.7.0
