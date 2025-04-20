@@ -7,8 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Changed
+
+- Change name of mariadb env variable
+
 ### Documentation
 
+- *(changelog)* Update CHANGELOG in Auto Release
 - *(changelog)* Update CHANGELOG in Auto Changelog
 
 ## [1.9.1] - 2025-02-17
