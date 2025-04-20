@@ -59,8 +59,10 @@ services:
     image: adminer:latest
     environment:
       ADMINER_DEFAULT_SERVER: ${DOLI_DB_HOST}
-    volumes:
-      - ./adminer/adminer.css:/var/www/html/adminer.css
+      ADMINER_PLUGINS: 'dark-switcher codemirror tables-filter'
+      # ADMINER_DESIGN: '' # For known design
+    # volumes:
+    #   - ./adminer/adminer.css:/var/www/html/adminer.css # For custom design
     ports:
       - ${ADM_HOST_PORT}:${ADM_DOCKER_PORT}
     depends_on:
