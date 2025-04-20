@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
-## [Unreleased]
+## [1.10.0] - 2025-04-20
 
 ### Changed
 
@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Documentation
 
+- *(changelog)* Update CHANGELOG in Auto Changelog
 - *(changelog)* Update CHANGELOG in Auto Release
 - *(changelog)* Update CHANGELOG in Auto Changelog
 
@@ -95,7 +96,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 - *(other)* Initial commit
 
-[unreleased]: https://github.com/cjaunay/dolibarr-docker/compare/v1.9.1..HEAD
+[1.10.0]: https://github.com/cjaunay/dolibarr-docker/compare/v1.9.1..v1.10.0
 [1.9.1]: https://github.com/cjaunay/dolibarr-docker/compare/v1.9.0..v1.9.1
 [1.9.0]: https://github.com/cjaunay/dolibarr-docker/compare/v1.8.0..v1.9.0
 [1.8.0]: https://github.com/cjaunay/dolibarr-docker/compare/v1.7.0..v1.8.0
