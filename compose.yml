@@ -32,11 +32,13 @@ services:
     container_name: dolibarr_db
     image: mariadb:latest
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${DOLI_DB_NAME}
-      MYSQL_USER: ${DOLI_DB_USER}
-      MYSQL_PASSWORD: ${DOLI_DB_PASSWORD}
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+      MARIADB_DATABASE: ${DOLI_DB_NAME}
+      MARIADB_USER: ${DOLI_DB_USER}
+      MARIADB_PASSWORD: ${DOLI_DB_PASSWORD}
       TZ: ${PHP_INI_DATE_TIMEZONE}
+    ports:
+      - ${MARIADB_HOST_PORT}:${MARIADB_DOCKER_PORT}
     volumes:
       - ./mariadb:/var/lib/mysql
     restart: always
