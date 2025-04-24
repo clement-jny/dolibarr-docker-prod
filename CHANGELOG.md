@@ -7,24 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
-### Documentation
-
-- *(changelog)* Update CHANGELOG in Auto Release
-
 ### Fixed
 
 - Update DOLI_HOST_PORT to 80 and use COMPOSE_FOR variable in container names
+
+### Maintenance
+
+- Deactivate log for changelog
 
 ## [1.11.0] - 2025-04-20
 
 ### Added
 
 - Use plugins and deactivate design
-
-### Documentation
-
-- *(changelog)* Update CHANGELOG in Auto Changelog
-- *(changelog)* Update CHANGELOG in Auto Release
 
 ### Maintenance
 
@@ -36,21 +31,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 - Change name of mariadb env variable
 
-### Documentation
-
-- *(changelog)* Update CHANGELOG in Auto Changelog
-- *(changelog)* Update CHANGELOG in Auto Release
-- *(changelog)* Update CHANGELOG in Auto Changelog
-
 ## [1.9.1] - 2025-02-17
 
 ### Added
 
 - Add timezone support on mariadb container
-
-### Documentation
-
-- *(changelog)* Update CHANGELOG in Auto Release
 
 ## [1.9.0] - 2025-02-10
 
@@ -58,11 +43,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 - *(workflow)* New wf for auto changelog and update for auto release
 - Add custom git-cliff configuration
-
-### Documentation
-
-- *(changelog)* Update CHANGELOG in Auto Changelog
-- *(changelog)* Update CHANGELOG in Auto Changelog
 
 ### Other
 
