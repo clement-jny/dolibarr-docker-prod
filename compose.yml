@@ -1,6 +1,6 @@
 services:
   web:
-    container_name: dolibarr_web
+    container_name: dolibarr_web_${COMPOSE_FOR}
     image: dolibarr/dolibarr:latest
     environment:
       WWW_USER_ID: ${WWW_USER_ID}
@@ -29,7 +29,7 @@ services:
     restart: always
 
   db:
-    container_name: dolibarr_db
+    container_name: dolibarr_db_${COMPOSE_FOR}
     image: mariadb:latest
     environment:
       MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
@@ -44,7 +44,7 @@ services:
     restart: always
 
   phpmyadmin:
-    container_name: dolibarr_phpmyadmin
+    container_name: dolibarr_phpmyadmin_${COMPOSE_FOR}
     image: phpmyadmin:latest
     ports:
       - ${PMA_HOST_PORT}:${PMA_DOCKER_PORT}
@@ -55,7 +55,7 @@ services:
     restart: always
 
   adminer:
-    container_name: dolibarr_adminer
+    container_name: dolibarr_adminer_${COMPOSE_FOR}
     image: adminer:latest
     environment:
       ADMINER_DEFAULT_SERVER: ${DOLI_DB_HOST}
