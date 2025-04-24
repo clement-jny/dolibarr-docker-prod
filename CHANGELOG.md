@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Documentation
+
+- *(changelog)* Update CHANGELOG in Auto Release
+
+### Fixed
+
+- Update DOLI_HOST_PORT to 80 and use COMPOSE_FOR variable in container names
+
 ## [1.11.0] - 2025-04-20
 
 ### Added
@@ -111,6 +121,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 - *(other)* Initial commit
 
+[unreleased]: https://github.com/cjaunay/dolibarr-docker/compare/v1.11.0..HEAD
 [1.11.0]: https://github.com/cjaunay/dolibarr-docker/compare/v1.10.0..v1.11.0
 [1.10.0]: https://github.com/cjaunay/dolibarr-docker/compare/v1.9.1..v1.10.0
 [1.9.1]: https://github.com/cjaunay/dolibarr-docker/compare/v1.9.0..v1.9.1
