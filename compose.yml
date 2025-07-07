@@ -3,6 +3,7 @@ services:
     container_name: dolibarr_web_${COMPOSE_FOR}
     image: dolibarr/dolibarr:latest
     environment:
+      # General
       WWW_USER_ID: ${WWW_USER_ID}
       WWW_GROUP_ID: ${WWW_GROUP_ID}
       PHP_INI_UPLOAD_MAX_FILESIZE: ${PHP_INI_UPLOAD_MAX_FILESIZE}
