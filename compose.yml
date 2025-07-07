@@ -28,9 +28,9 @@ services:
     volumes:
       - ./custom:/var/www/html/custom
       - ./documents:/var/www/documents
-    restart: always
     depends_on:
       - db
+    restart: always
 
   db:
     container_name: dolibarr_db_${COMPOSE_FOR}
@@ -46,30 +46,4 @@ services:
       - ${MARIADB_HOST_PORT}:${MARIADB_DOCKER_PORT}
     volumes:
       - ./mariadb:/var/lib/mysql
-    restart: always
-
-  phpmyadmin:
-    container_name: dolibarr_phpmyadmin_${COMPOSE_FOR}
-    image: phpmyadmin:latest
-    ports:
-      - ${PMA_HOST_PORT}:${PMA_DOCKER_PORT}
-    links:
-      - db
-    depends_on:
-      - db
-    restart: always
-
-  adminer:
-    container_name: dolibarr_adminer_${COMPOSE_FOR}
-    image: adminer:latest
-    environment:
-      ADMINER_DEFAULT_SERVER: ${DOLI_DB_HOST}
-      ADMINER_PLUGINS: 'dark-switcher codemirror tables-filter'
-      # ADMINER_DESIGN: '' # For known design
-    # volumes:
-    #   - ./adminer/adminer.css:/var/www/html/adminer.css # For custom design
-    ports:
-      - ${ADM_HOST_PORT}:${ADM_DOCKER_PORT}
-    depends_on:
-      - db
     restart: always
