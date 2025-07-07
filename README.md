@@ -82,6 +82,12 @@ If you're using traefik, don't forget to delete the 'ports' section in `compose.
 
 If you want to have phpmyadmin/adminer on traefik. Add them in the correct network
 
+You need to add the following variable to your [.env](.env) file:
+
+```bash
+# TRAEFIK
+TRAEFIK_HOST=localhost:${DOLI_HOST_PORT}
+```
 
 
 ### Adding phpMyAdmin or Adminer
