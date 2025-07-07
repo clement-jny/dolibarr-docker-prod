@@ -25,12 +25,12 @@ services:
       DOLI_COMPANY_COUNTRYCODE: ${DOLI_COMPANY_COUNTRYCODE}
     ports:
       - ${DOLI_HOST_PORT}:${DOLI_DOCKER_PORT}
-    links:
-      - db
     volumes:
       - ./custom:/var/www/html/custom
       - ./documents:/var/www/documents
     restart: always
+    depends_on:
+      - db
 
   db:
     container_name: dolibarr_db_${COMPOSE_FOR}
