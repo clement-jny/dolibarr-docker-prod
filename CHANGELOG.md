@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Changed
+
+- Update Traefik configuration to use COMPOSE_FOR variable instead of DOLI_COMPANY_NAME
+- Remove phpMyAdmin and Adminer configuration from .env.example
+- Remove unused phpMyAdmin and Adminer services from compose.yml
+
+### Documentation
+
+- Add instructions for integrating phpMyAdmin and Adminer in Docker setup
+- Improve comments for environment variables in compose.yml
+- Improve comments for environment variables in compose.yml
+
+### Fixed
+
+- Replace links with depends_on for db service in compose.yml
+
 ## [1.11.1] - 2025-04-24
 
 ### Fixed
@@ -101,13 +119,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 - *(other)* Initial commit
 
-[1.11.1]: https://github.com/cjaunay/dolibarr-docker/compare/v1.11.0..v1.11.1
-[1.11.0]: https://github.com/cjaunay/dolibarr-docker/compare/v1.10.0..v1.11.0
-[1.10.0]: https://github.com/cjaunay/dolibarr-docker/compare/v1.9.1..v1.10.0
-[1.9.1]: https://github.com/cjaunay/dolibarr-docker/compare/v1.9.0..v1.9.1
-[1.9.0]: https://github.com/cjaunay/dolibarr-docker/compare/v1.8.0..v1.9.0
-[1.8.0]: https://github.com/cjaunay/dolibarr-docker/compare/v1.7.0..v1.8.0
-[1.7.0]: https://github.com/cjaunay/dolibarr-docker/compare/v1.6.0..v1.7.0
-[1.6.0]: https://github.com/cjaunay/dolibarr-docker/compare/v1.5.0..v1.6.0
-[1.5.0]: https://github.com/cjaunay/dolibarr-docker/releases/tag/v1.5.0
+[unreleased]: https://github.com/cjaunay/dolibarr-docker-prod/compare/v1.11.1..HEAD
+[1.11.1]: https://github.com/cjaunay/dolibarr-docker-prod/compare/v1.11.0..v1.11.1
+[1.11.0]: https://github.com/cjaunay/dolibarr-docker-prod/compare/v1.10.0..v1.11.0
+[1.10.0]: https://github.com/cjaunay/dolibarr-docker-prod/compare/v1.9.1..v1.10.0
+[1.9.1]: https://github.com/cjaunay/dolibarr-docker-prod/compare/v1.9.0..v1.9.1
+[1.9.0]: https://github.com/cjaunay/dolibarr-docker-prod/compare/v1.8.0..v1.9.0
+[1.8.0]: https://github.com/cjaunay/dolibarr-docker-prod/compare/v1.7.0..v1.8.0
+[1.7.0]: https://github.com/cjaunay/dolibarr-docker-prod/compare/v1.6.0..v1.7.0
+[1.6.0]: https://github.com/cjaunay/dolibarr-docker-prod/compare/v1.5.0..v1.6.0
+[1.5.0]: https://github.com/cjaunay/dolibarr-docker-prod/releases/tag/v1.5.0
 
