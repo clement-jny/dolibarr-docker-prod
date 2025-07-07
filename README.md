@@ -28,7 +28,8 @@ Ensure that the `.env` file does not contain quotes around values, as they may c
 Example of a valid `.env` file:
 
 ```bash
-DOLI_COMPANY_NAME=My Company
+COMPOSE_FOR=my_company
+DOLI_COMPANY_NAME="My Company"
 DOLI_URL_ROOT=erp.mydomain.com
 DOLI_DOCKER_PORT=80
 ```

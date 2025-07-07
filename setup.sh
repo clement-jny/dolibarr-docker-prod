@@ -30,19 +30,19 @@ read -p "Do you want to enable Traefik for this instance? (y/n): " TRAEFIK_ENABL
 # Generate a compose.override.yml file if Traefik needs to be enabled
 if [[ "$TRAEFIK_ENABLED" == "y" ]]; then
   # Transform DOLI_COMPANY_NAME: replace spaces and '-' with '_'
-  DOLI_COMPANY_NAME_CLEAN=$(echo "$DOLI_COMPANY_NAME" | tr ' -' '__')
+  # DOLI_COMPANY_NAME_CLEAN=$(echo "$DOLI_COMPANY_NAME" | tr ' -' '__')
 
   cat <<EOF > compose.override.yml
 services:
   web:
     labels:
       - traefik.enable=true
-      - traefik.http.routers.${DOLI_COMPANY_NAME_CLEAN}.entrypoints=web
-      - traefik.http.routers.${DOLI_COMPANY_NAME_CLEAN}.entrypoints=websecure
-      - traefik.http.routers.${DOLI_COMPANY_NAME_CLEAN}.tls=true
-      - traefik.http.routers.${DOLI_COMPANY_NAME_CLEAN}.tls.certresolver=production
-      - traefik.http.routers.${DOLI_COMPANY_NAME_CLEAN}.rule=Host(\`${TRAEFIK_HOST}\`)
-      - traefik.http.services.${DOLI_COMPANY_NAME_CLEAN}.loadbalancer.server.port=\${DOLI_DOCKER_PORT}
+      - traefik.http.routers.${COMPOSE_FOR}.entrypoints=web
+      - traefik.http.routers.${COMPOSE_FOR}.entrypoints=websecure
+      - traefik.http.routers.${COMPOSE_FOR}.tls=true
+      - traefik.http.routers.${COMPOSE_FOR}.tls.certresolver=production
+      - traefik.http.routers.${COMPOSE_FOR}.rule=Host(\`${TRAEFIK_HOST}\`)
+      - traefik.http.services.${COMPOSE_FOR}.loadbalancer.server.port=\${DOLI_DOCKER_PORT}
     networks:
       - traefik_default
 
@@ -54,7 +54,7 @@ networks:
   traefik_default:
     external: true
 EOF
-  echo "✅ Traefik support enabled with name: $DOLI_COMPANY_NAME_CLEAN"
+  echo "✅ Traefik support enabled with name: $COMPOSE_FOR"
 else
   echo "🚫 Traefik will not be enabled."
 fi
