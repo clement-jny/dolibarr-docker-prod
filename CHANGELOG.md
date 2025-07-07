@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- Remove TRAEFIK_HOST variable from .env.example and update README with new configuration instructions
 - Update Traefik configuration to use COMPOSE_FOR variable instead of DOLI_COMPANY_NAME
 - Remove phpMyAdmin and Adminer configuration from .env.example
 - Remove unused phpMyAdmin and Adminer services from compose.yml
