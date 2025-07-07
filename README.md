@@ -78,3 +78,49 @@ If enabled:
 
 If you choose not to enable Traefik, the standard setup will proceed without additional proxy settings.
 If you're using traefik, don't forget to delete the 'ports' section in `compose.yml`
+
+If you want to have phpmyadmin/adminer on traefik. Add them in the correct network
+
+
+
+### Adding phpMyAdmin or Adminer
+
+If you want to add phpMyAdmin or Adminer for database management, you can do so by adding the respective service to your [compose.yml](compose.yml) file.
+
+```yaml
+phpmyadmin:
+    container_name: dolibarr_phpmyadmin_${COMPOSE_FOR}
+    image: phpmyadmin:latest
+    ports:
+      - ${PMA_HOST_PORT}:${PMA_DOCKER_PORT}
+    depends_on:
+      - db
+    restart: always
+
+adminer:
+    container_name: dolibarr_adminer_${COMPOSE_FOR}
+    image: adminer:latest
+    environment:
+      ADMINER_DEFAULT_SERVER: ${DOLI_DB_HOST}
+      ADMINER_PLUGINS: 'dark-switcher codemirror tables-filter'
+      # ADMINER_DESIGN: '' # For known design
+    # volumes:
+    #   - ./adminer/adminer.css:/var/www/html/adminer.css # For custom design
+    ports:
+      - ${ADM_HOST_PORT}:${ADM_DOCKER_PORT}
+    depends_on:
+      - db
+    restart: always
+```
+
+And update your [.env](.env) file with the necessary variables:
+
+```bash
+# PHPMYADMIN
+PMA_HOST_PORT=8080
+PMA_DOCKER_PORT=80
+
+# ADMINER
+ADM_HOST_PORT=8081
+ADM_DOCKER_PORT=8080
+```
