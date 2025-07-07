@@ -8,15 +8,18 @@ services:
       PHP_INI_UPLOAD_MAX_FILESIZE: ${PHP_INI_UPLOAD_MAX_FILESIZE}
       PHP_INI_DATE_TIMEZONE: ${PHP_INI_DATE_TIMEZONE}
 
+      # Dolibarr db connection
       DOLI_DB_HOST: ${DOLI_DB_HOST}
       DOLI_DB_NAME: ${DOLI_DB_NAME}
       DOLI_DB_USER: ${DOLI_DB_USER}
       DOLI_DB_PASSWORD: ${DOLI_DB_PASSWORD}
       DOLI_URL_ROOT: ${DOLI_URL_ROOT}
 
+      # Dolibarr admin credentials
       DOLI_ADMIN_LOGIN: ${DOLI_ADMIN_LOGIN}
       DOLI_ADMIN_PASSWORD: ${DOLI_ADMIN_PASSWORD}
 
+      # Dolibarr company information
       DOLI_COMPANY_NAME: ${DOLI_COMPANY_NAME}
       DOLI_COMPANY_COUNTRYCODE: ${DOLI_COMPANY_COUNTRYCODE}
     ports:
@@ -32,6 +35,7 @@ services:
     container_name: dolibarr_db_${COMPOSE_FOR}
     image: mariadb:latest
     environment:
+      # General
       MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
       MARIADB_DATABASE: ${DOLI_DB_NAME}
       MARIADB_USER: ${DOLI_DB_USER}
