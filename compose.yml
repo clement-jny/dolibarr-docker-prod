@@ -1,7 +1,7 @@
 services:
   web:
     container_name: dolibarr_web_${COMPOSE_FOR}
-    image: dolibarr/dolibarr:latest
+    image: dolibarr/dolibarr:${DOLI_VERSION}
     environment:
       # General
       WWW_USER_ID: ${WWW_USER_ID}
