@@ -11,7 +11,7 @@ else
 fi
 
 # Directories to create
-directories=(custom documents mariadb old adminer)
+directories=(custom documents mariadb)
 
 # Create directories if they don't exist
 for dir in "${directories[@]}"; do
@@ -29,8 +29,6 @@ read -p "Do you want to enable Traefik for this instance? (y/n): " TRAEFIK_ENABL
 
 # Generate a compose.override.yml file if Traefik needs to be enabled
 if [[ "$TRAEFIK_ENABLED" == "y" ]]; then
-  # Transform DOLI_COMPANY_NAME: replace spaces and '-' with '_'
-  # DOLI_COMPANY_NAME_CLEAN=$(echo "$DOLI_COMPANY_NAME" | tr ' -' '__')
 
   cat <<EOF > compose.override.yml
 services:
@@ -54,6 +52,7 @@ networks:
   traefik_default:
     external: true
 EOF
+
   echo "✅ Traefik support enabled with name: $COMPOSE_FOR"
 else
   echo "🚫 Traefik will not be enabled."
@@ -62,11 +61,15 @@ fi
 # Launch Docker Compose
 docker compose up --build -d
 
-# Write summary to a file
+# Write a summary file
 cat <<EOF > summary.txt
-Lien d'accès: ${DOLI_URL_ROOT}
-Crédentials de l'administrateur: ${DOLI_ADMIN_LOGIN} / ${DOLI_ADMIN_PASSWORD}
-Nom de la base de données: ${DOLI_DB_NAME}
-Crédential de l'utilisateur de la base de données pour dolibarr: ${DOLI_DB_USER} / ${DOLI_DB_PASSWORD}
-Crédential de l'utilisateur root de la base de données: root / ${MARIADB_ROOT_PASSWORD}
+Access link: ${DOLI_URL_ROOT}
+
+- Dolibarr DB credentials -
+DB name is: ${DOLI_DB_NAME}
+MariaDB user: root / ${MARIADB_ROOT_PASSWORD}
+MariaDB user: ${DOLI_DB_USER} / ${DOLI_DB_PASSWORD}
+
+- Dolibarr web credential -
+Dolibarr superuser: ${DOLI_ADMIN_LOGIN} / ${DOLI_ADMIN_PASSWORD}
 EOF
