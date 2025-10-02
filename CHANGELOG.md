@@ -9,12 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- Add .gitkeep entries for custom, documents, and mariadb directories
 - Use DOLI_VERSION env var
 - Add specific version selection in .env
 - Keep empty folder
 
 ### Changed
 
+- Remove unused directories and clean up summary output
 - Remove quote
 - Remove unnecessery file
 
