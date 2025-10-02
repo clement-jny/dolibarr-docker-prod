@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
-## [Unreleased]
+## [1.13.0] - 2025-10-02
 
 ### Added
 
@@ -135,7 +135,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 - *(other)* Initial commit
 
-[unreleased]: https://github.com/clement-jny/dolibarr-docker-prod/compare/v1.12.0..HEAD
+[1.13.0]: https://github.com/clement-jny/dolibarr-docker-prod/compare/v1.12.0..v1.13.0
 [1.12.0]: https://github.com/clement-jny/dolibarr-docker-prod/compare/v1.11.1..v1.12.0
 [1.11.1]: https://github.com/clement-jny/dolibarr-docker-prod/compare/v1.11.0..v1.11.1
 [1.11.0]: https://github.com/clement-jny/dolibarr-docker-prod/compare/v1.10.0..v1.11.0
