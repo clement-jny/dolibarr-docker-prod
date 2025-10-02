@@ -1,7 +1,9 @@
 custom
+!custom/.gitkeep
 documents
+!documents/.gitkeep
 mariadb
-old
+!mariadb/.gitkeep
 
 .env
 
