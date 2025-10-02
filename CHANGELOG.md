@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Added
+
+- Use DOLI_VERSION env var
+- Add specific version selection in .env
+- Keep empty folder
+
+### Changed
+
+- Remove quote
+- Remove unnecessery file
+
 ## [1.12.0] - 2025-07-07
 
 ### Changed
@@ -120,14 +133,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 - *(other)* Initial commit
 
-[1.12.0]: https://github.com/cjaunay/dolibarr-docker-prod/compare/v1.11.1..v1.12.0
-[1.11.1]: https://github.com/cjaunay/dolibarr-docker-prod/compare/v1.11.0..v1.11.1
-[1.11.0]: https://github.com/cjaunay/dolibarr-docker-prod/compare/v1.10.0..v1.11.0
-[1.10.0]: https://github.com/cjaunay/dolibarr-docker-prod/compare/v1.9.1..v1.10.0
-[1.9.1]: https://github.com/cjaunay/dolibarr-docker-prod/compare/v1.9.0..v1.9.1
-[1.9.0]: https://github.com/cjaunay/dolibarr-docker-prod/compare/v1.8.0..v1.9.0
-[1.8.0]: https://github.com/cjaunay/dolibarr-docker-prod/compare/v1.7.0..v1.8.0
-[1.7.0]: https://github.com/cjaunay/dolibarr-docker-prod/compare/v1.6.0..v1.7.0
-[1.6.0]: https://github.com/cjaunay/dolibarr-docker-prod/compare/v1.5.0..v1.6.0
-[1.5.0]: https://github.com/cjaunay/dolibarr-docker-prod/releases/tag/v1.5.0
+[unreleased]: https://github.com/clement-jny/dolibarr-docker-prod/compare/v1.12.0..HEAD
+[1.12.0]: https://github.com/clement-jny/dolibarr-docker-prod/compare/v1.11.1..v1.12.0
+[1.11.1]: https://github.com/clement-jny/dolibarr-docker-prod/compare/v1.11.0..v1.11.1
+[1.11.0]: https://github.com/clement-jny/dolibarr-docker-prod/compare/v1.10.0..v1.11.0
+[1.10.0]: https://github.com/clement-jny/dolibarr-docker-prod/compare/v1.9.1..v1.10.0
+[1.9.1]: https://github.com/clement-jny/dolibarr-docker-prod/compare/v1.9.0..v1.9.1
+[1.9.0]: https://github.com/clement-jny/dolibarr-docker-prod/compare/v1.8.0..v1.9.0
+[1.8.0]: https://github.com/clement-jny/dolibarr-docker-prod/compare/v1.7.0..v1.8.0
+[1.7.0]: https://github.com/clement-jny/dolibarr-docker-prod/compare/v1.6.0..v1.7.0
+[1.6.0]: https://github.com/clement-jny/dolibarr-docker-prod/compare/v1.5.0..v1.6.0
+[1.5.0]: https://github.com/clement-jny/dolibarr-docker-prod/releases/tag/v1.5.0
 
